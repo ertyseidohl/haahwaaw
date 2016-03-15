@@ -2,8 +2,10 @@ var image;
 var canvas;
 
 function drawImage(doScale) {
-	var maxWidth = $('#canvasContainer').width();
-	if (!doScale) {
+	var maxWidth;
+	if (doScale) {
+		maxWidth = Math.min(1920, $('#canvasContainer').width());
+	} else {
 		maxWidth = 1920;
 	}
 	
