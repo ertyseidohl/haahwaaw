@@ -10,12 +10,13 @@ app.get("/img/:url", function (req, res) {
 
 // Handle 404
 app.use(function (req, res) {
-	res.send('404: Page not Found', 404);
+	res.status(404).send('404: Page not Found');
 });
 
 // Handle 500
 app.use(function (error, req, res, next) {
-	res.send('500: Internal Server Error', 500);
+	console.log("500", error.message);
+	res.status(418).send('Server Error: ' + error.message);
 });
 
 app.listen(process.env.PORT || 3000, function () {

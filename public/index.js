@@ -3,6 +3,7 @@ var canvas;
 
 function drawImage() {
 	var maxWidth = $('#canvasContainer').width();
+	
 	canvas.width = image.width;
 	canvas.height = image.height;
 	var ctx = canvas.getContext("2d");
@@ -32,13 +33,25 @@ function drawImage() {
 	ctx.restore();
 }
 
+function showError(err) {
+	$('#error').show();
+}
+
+function hideError() {
+	$('#error').hide();
+}
+
 function newUrl(new_url) {
 	image = new Image();
 
 	var $image = $(image);
 	image.setAttribute('crossOrigin', 'anonymous');
 	image.src = './img/' + encodeURIComponent(new_url);
+	$image.error(function(err) {
+		showError(err);
+	});
 	$image.load(function () {
+		hideError();
 		drawImage(image, canvas);
 	});
 }
