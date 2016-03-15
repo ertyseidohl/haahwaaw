@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
-  <script src="index.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+	<script src="index.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
+
 <body>
-   <canvas id="canvas"></canvas>
-   <br>
-   <input type="text" id="url">
-   <button id="new">Load Image</button>
-   <button id="export">Export Image</button>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<input class="form-control" type="text" id="url">
+				<button class="btn btn-success" id="new">Load Image</button>
+				<button class="btn btn-info" id="export">Export Image</button>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<canvas id="canvas"></canvas>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>
