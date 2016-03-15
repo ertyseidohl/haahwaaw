@@ -1,11 +1,20 @@
 var image;
 var canvas;
 
-function drawImage() {
+function drawImage(doScale) {
 	var maxWidth = $('#canvasContainer').width();
+	if (!doScale) {
+		maxWidth = 1920;
+	}
 	
-	canvas.width = image.width;
-	canvas.height = image.height;
+	var scale = image.width <= maxWidth ? 1 : maxWidth / image.width;
+	
+	var width = image.width * scale;
+	var height = image.height * scale;
+	
+	canvas.width = width;
+	canvas.height = height;
+	
 	var ctx = canvas.getContext("2d");
 	ctx.drawImage(
 		image,
@@ -15,8 +24,8 @@ function drawImage() {
 		image.height,
 		0,
 		0,
-		image.width / 2,
-		image.height
+		width / 2,
+		height
 	);
 	ctx.save();
 	ctx.scale(-1, 1);
@@ -25,10 +34,11 @@ function drawImage() {
 		0,
 		0,
 		image.width / 2,
-		image.height, -image.width,
+		image.height,
+		-width,
 		0,
-		image.width / 2,
-		image.height
+		width / 2,
+		height
 	);
 	ctx.restore();
 }
@@ -52,7 +62,7 @@ function newUrl(new_url) {
 	});
 	$image.load(function () {
 		hideError();
-		drawImage(image, canvas);
+		drawImage(true);
 	});
 }
 
@@ -69,6 +79,7 @@ $(document).ready(function () {
 	});
 
 	$('#export').click(function () {
+		drawImage(false);
 		var dt = canvas.toDataURL('image/png');
 		document.location.href = dt;
 	});
