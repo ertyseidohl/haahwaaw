@@ -20,10 +20,15 @@ function drawImage(doScale) {
 	
 	console.log(cropval / 1000);
 	
-	canvas.width = fullwidth;
+	if(doScale) {
+		canvas.width = fullwidth;
+	} else {
+		canvas.width = fullwidth * cropval;
+	}
 	canvas.height = height;
 	
 	var ctx = canvas.getContext("2d");
+	
 	ctx.drawImage(
 		image,
 		0,
