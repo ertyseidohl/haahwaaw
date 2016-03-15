@@ -8,52 +8,80 @@ function drawImage(doScale) {
 	} else {
 		maxWidth = 1920;
 	}
-	
+
 	var scale = image.width * 2 <= maxWidth ? 1 : maxWidth / (image.width * 2);
 	var fullwidth = image.width * 2 * scale;
 	var cropwidth = image.width * scale;
 	var height = image.height * scale;
-	
+
+	var isFromRight = $('#fromright').is(":checked");
+
 	var crop = $('#crop');
 	crop.width(fullwidth - 25);
 	var cropval = $('#crop').val() / 1000;
-	
+
 	console.log(cropval / 1000);
-	
-	if(doScale) {
+
+	if (doScale) {
 		canvas.width = fullwidth;
 	} else {
 		canvas.width = fullwidth * cropval;
 	}
 	canvas.height = height;
-	
+
 	var ctx = canvas.getContext("2d");
-	
-	ctx.drawImage(
-		image,
-		0,
-		0,
-		image.width * cropval,
-		image.height,
-		0,
-		0,
-		cropwidth * cropval,
-		height
-	);
-	ctx.save();
-	ctx.scale(-1, 1);
-	ctx.drawImage(
-		image,
-		0,
-		0,
-		image.width * cropval,
-		image.height,
-		-fullwidth * cropval,
-		0,
-		cropwidth * cropval,
-		height
-	);
-	ctx.restore();
+	if (isFromRight) {
+		ctx.drawImage(
+			image,
+			image.width * (1-cropval),
+			0,
+			image.width * (cropval),
+			image.height,
+			0,
+			0,
+			cropwidth * cropval,
+			height
+		);
+		ctx.save();
+		ctx.scale(-1, 1);
+		ctx.drawImage(
+			image,
+			image.width * (1-cropval),
+			0,
+			image.width * (cropval),
+			image.height,
+			-fullwidth * cropval,
+			0,
+			cropwidth * cropval,
+			height
+		);
+		ctx.restore();
+	} else {
+		ctx.drawImage(
+			image,
+			0,
+			0,
+			image.width * cropval,
+			image.height,
+			0,
+			0,
+			cropwidth * cropval,
+			height
+		);
+		ctx.save();
+		ctx.scale(-1, 1);
+		ctx.drawImage(
+			image,
+			0,
+			0,
+			image.width * cropval,
+			image.height, -fullwidth * cropval,
+			0,
+			cropwidth * cropval,
+			height
+		);
+		ctx.restore();
+	}
 }
 
 function showError(err) {
@@ -70,7 +98,7 @@ function newUrl(new_url) {
 	var $image = $(image);
 	image.setAttribute('crossOrigin', 'anonymous');
 	image.src = './img/' + encodeURIComponent(new_url);
-	$image.error(function(err) {
+	$image.error(function (err) {
 		showError(err);
 	});
 	$image.load(function () {
@@ -96,12 +124,16 @@ $(document).ready(function () {
 		var dt = canvas.toDataURL('image/png');
 		document.location.href = dt;
 	});
-	
-	$('#crop').change(function(evt) {
+
+	$('#crop').change(function (evt) {
 		drawImage(true);
 	});
-	
-	$(window).resize(function(evt){
+
+	$('#fromright').change(function (evt) {
+		drawImage(true);
+	});
+
+	$(window).resize(function (evt) {
 		drawImage(true);
 	})
 

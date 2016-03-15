@@ -12,12 +12,15 @@
 		.btn {
 			margin: 1em;
 		}
+		
 		.btns {
 			text-align: center;
 		}
+		
 		#crop {
 			margin-bottom: 1em;
 		}
+		
 		a {
 			cursor: pointer;
 		}
@@ -31,8 +34,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-6" id="canvasContainer">
 				<label>Load Image from URL</label>
-					<input class="form-control" type="text" id="url">
-				
+				<input class="form-control" type="text" id="url">
 				<div class="btns">
 					<button class="btn btn-success" id="new">Load Image From URL</button>
 					<button class="btn btn-info" id="export">Export Mirrored Image</button>
@@ -41,6 +43,7 @@
 			</div>
 			<div class="col-xs-12 col-md-6">
 				<label>Adjust Crop (<a onclick="$('#crop').val(500);drawImage(true)">reset</a>)</label>
+				<input type="checkbox" id="fromright"> <label for="mirror">From Right</label>
 				<input type="range" id="crop" min=0 max=1000 step=1 value=500 class="form-control">
 				<canvas id="canvas"></canvas>
 			</div>
