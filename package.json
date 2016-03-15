@@ -1,14 +1,15 @@
 {
-  "name": "haahwaaw",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.13.4"
-  }
+	"name": "haahwaaw",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node haahwaaw.js"
+	},
+	"author": "@ertyseidohl",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.13.4"
+	}
 }
