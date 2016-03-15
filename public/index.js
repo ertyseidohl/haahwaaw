@@ -9,12 +9,18 @@ function drawImage(doScale) {
 		maxWidth = 1920;
 	}
 	
-	var scale = image.width <= maxWidth ? 1 : maxWidth / image.width;
-	
-	var width = image.width * scale;
+	var scale = image.width * 2 <= maxWidth ? 1 : maxWidth / (image.width * 2);
+	var fullwidth = image.width * 2 * scale;
+	var cropwidth = image.width * scale;
 	var height = image.height * scale;
 	
-	canvas.width = width;
+	var crop = $('#crop');
+	crop.width(fullwidth - 25);
+	var cropval = $('#crop').val() / 1000;
+	
+	console.log(cropval / 1000);
+	
+	canvas.width = fullwidth;
 	canvas.height = height;
 	
 	var ctx = canvas.getContext("2d");
@@ -22,11 +28,11 @@ function drawImage(doScale) {
 		image,
 		0,
 		0,
-		image.width / 2,
+		image.width * cropval,
 		image.height,
 		0,
 		0,
-		width / 2,
+		cropwidth * cropval,
 		height
 	);
 	ctx.save();
@@ -35,11 +41,11 @@ function drawImage(doScale) {
 		image,
 		0,
 		0,
-		image.width / 2,
+		image.width * cropval,
 		image.height,
-		-width,
+		-fullwidth * cropval,
 		0,
-		width / 2,
+		cropwidth * cropval,
 		height
 	);
 	ctx.restore();
@@ -85,5 +91,13 @@ $(document).ready(function () {
 		var dt = canvas.toDataURL('image/png');
 		document.location.href = dt;
 	});
+	
+	$('#crop').change(function(evt) {
+		drawImage(true);
+	});
+	
+	$(window).resize(function(evt){
+		drawImage(true);
+	})
 
 });

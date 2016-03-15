@@ -3,22 +3,45 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NAPOOPAN</title>
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
 	<script src="index.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<style>
+		.btn {
+			margin: 1em;
+		}
+		.btns {
+			text-align: center;
+		}
+		#crop {
+			margin-bottom: 1em;
+		}
+		a {
+			cursor: pointer;
+		}
+	</style>
 </head>
 
 <body>
 	<div class="container">
+		<h1>Image Mirrorer</h1>
+		<p>By <a href="http://erty.me">Erty Seidohl</a></p>
 		<div class="row">
 			<div class="col-xs-12 col-md-6" id="canvasContainer">
-				<input class="form-control" type="text" id="url">
-				<button class="btn btn-success" id="new">Load Image</button>
-				<button class="btn btn-info" id="export">Export Image</button>
+				<label>Load Image from URL</label>
+					<input class="form-control" type="text" id="url">
+				
+				<div class="btns">
+					<button class="btn btn-success" id="new">Load Image From URL</button>
+					<button class="btn btn-info" id="export">Export Mirrored Image</button>
+				</div>
 				<div class="alert alert-danger" id="error" style="display:none">There was an error loading that image. Are you sure the URL is correct?</div>
 			</div>
 			<div class="col-xs-12 col-md-6">
+				<label>Adjust Crop (<a onclick="$('#crop').val(500);drawImage(true)">reset</a>)</label>
+				<input type="range" id="crop" min=0 max=1000 step=1 value=500 class="form-control">
 				<canvas id="canvas"></canvas>
 			</div>
 		</div>
