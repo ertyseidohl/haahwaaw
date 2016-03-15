@@ -31,17 +31,19 @@ function drawImage(doScale) {
 
 	var ctx = canvas.getContext("2d");
 	if (isFromRight) {
+		ctx.save();
 		ctx.drawImage(
 			image,
 			image.width * (1-cropval),
 			0,
 			image.width * (cropval),
 			image.height,
-			0,
+			cropwidth * cropval,
 			0,
 			cropwidth * cropval,
 			height
 		);
+		ctx.restore();
 		ctx.save();
 		ctx.scale(-1, 1);
 		ctx.drawImage(
@@ -50,7 +52,7 @@ function drawImage(doScale) {
 			0,
 			image.width * (cropval),
 			image.height,
-			-fullwidth * cropval,
+			-cropwidth * cropval,
 			0,
 			cropwidth * cropval,
 			height
@@ -111,6 +113,7 @@ $(document).ready(function () {
 	canvas = document.getElementById("canvas");
 
 	var halo_url = "http://vignette2.wikia.nocookie.net/halo/images/f/f4/Halo_Wars_-_Cover_Art_-_Final.jpg/revision/latest?cb=20080825184906";
+	
 	$('#url').val(halo_url);
 
 	newUrl(halo_url);
