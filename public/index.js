@@ -113,7 +113,7 @@ $(document).ready(function () {
 	canvas = document.getElementById("canvas");
 
 	var halo_url = "http://vignette2.wikia.nocookie.net/halo/images/f/f4/Halo_Wars_-_Cover_Art_-_Final.jpg/revision/latest?cb=20080825184906";
-	
+
 	$('#url').val(halo_url);
 
 	newUrl(halo_url);
